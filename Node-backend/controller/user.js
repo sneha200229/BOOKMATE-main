@@ -22,7 +22,19 @@ module.exports.signup = (req,res) =>{
     })
 
     newUser.save().then(()=>{
-        res.send({ code: 200 , message : 'Signup success'})
+        res.send({ 
+            code: 200 , 
+            message : 'Signup success',
+        //     lname: result.lname,
+        //     code:200,
+        //    // message:'user found',
+        //     token:'signuptoken'
+
+
+
+
+
+        })
     })
 
         .catch((err)=>{
@@ -49,6 +61,7 @@ module.exports.signin=(req,res)=>{
     }else{
         res.send({
             email: result.email,
+            fname: result.fname, 
             code:200,
             message:'user found',
             token:'ffgffg'

@@ -26,10 +26,60 @@ const Rightbar = ()=>{
           };
     
           // Send a POST request to the backend API
-          await axios.post('http://localhost:5001/signup', userData);
+          await axios.post('http://localhost:5001/signup', userData)
+          .then(res=>{
+            console.log(res.data)
+            
+           
+            if(res.data.code===200)
+            {
+              alert("registration Successful")
+               //move to feed page
+               navigate('/signin')
+              localStorage.setItem('TOKEN',res.data.token)
+               //console.log('LNAME from res.data:', res.data.lname); // Log the value
+              // console.log('Response data:', res.data);
+               localStorage.setItem('LNAME',res.data.lname)
+  
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
     
-          alert('Registration Successful')
-          navigate('/signin')
+          //alert('Registration Successful')
+         // navigate('/signin')
         } catch (error) {
           console.error('Error signing up:', error);
           alert("Registration failed")

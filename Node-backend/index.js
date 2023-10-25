@@ -50,6 +50,8 @@ app.post('/signin',userController.signin)
 app.post('/sendotp',userController.sendotp)
 app.post('/submitotp',userController.submitotp)
 app.post('/storeBook',bookController.storeBook)
+app.get('/fetchBook',bookController.fetchBook)
+
 
 app.listen(port,()=>{
     console.log(`Server running on port ${port}`)

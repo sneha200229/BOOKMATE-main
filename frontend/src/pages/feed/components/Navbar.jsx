@@ -43,12 +43,15 @@ const UserBox= styled(Box)(({theme})=>({
 
 
 const Navbar = ()=>{
+    //const lname = localStorage.getItem('LNAME');
+
 
     return(
         <AppBar position='sticky'>
             <StyledToolbar style={{ backgroundColor:'#EEF1F4' }}>
             {/* <Typography variant='h6' sx={{display:{xs:'none' , sm:'block'}}}>BookMate</Typography> */}
             <img src={Name} alt="Bookmate" style={{width:'15%', justifyContent:'center',alignItems:'center'}} />
+            <span style={{ color: 'black' }}>{localStorage.getItem('FNAME')}</span>
             <Pets sx={{display:{sx:'block',sm:'none'}}}/>
             <Search>
                 <InputBase placeholder='Search...' sx={{ width: '100%' }} />

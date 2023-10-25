@@ -12,13 +12,16 @@ const Rightbar = ()=>{
 
   const[email,setEmail]= useState('')
   const[password,setPassword]= useState('')
+  //const[lname,setLastName]= useState('')
+
   const handleSubmit=()=>
   {
       console.log(email,password)
       axios.post('http://localhost:5001/signin',
       {
           email:email,
-          password:password
+          password:password,
+          //lname:lname
       }
       )
       .then(res=>{
@@ -35,10 +38,12 @@ const Rightbar = ()=>{
           if(res.data.code===200)
           {
             alert("Login Successful")
-             //move to home
+             //move to feed page
              navigate('/feed')
+            // console.log('LNAME from res.data:', res.data.lname); // Log the value
              localStorage.setItem('TOKEN',res.data.token)
              localStorage.setItem('EMAIL',res.data.email)
+            localStorage.setItem('FNAME',res.data.fname)
 
           }
          
