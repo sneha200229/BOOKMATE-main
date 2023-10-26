@@ -36,10 +36,10 @@ const Rightbar = ()=>{
               alert("registration Successful")
                //move to feed page
                navigate('/signin')
-              localStorage.setItem('TOKEN',res.data.token)
+             // localStorage.setItem('TOKEN',res.data.token)
                //console.log('LNAME from res.data:', res.data.lname); // Log the value
               // console.log('Response data:', res.data);
-               localStorage.setItem('LNAME',res.data.lname)
+             //  localStorage.setItem('LNAME',res.data.lname)
   
             }
         })

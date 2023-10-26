@@ -54,20 +54,6 @@ export default function StandardImageList() {
   return (
     <div>
       <ImageList sx={{ width: '100%', height: 600 }} cols={3} rowHeight="auto" id='imglist'>
-        {/* {itemData.map((item) => (
-          <ImageListItem key={item.img} onClick={() => handleImageClick(item)}>
-            <img
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-       {data.map((books)=>{
-        console.log(books);
-       })} */}
-
       {data.map((item) => (
           <ImageListItem key={item._id} onClick={() => handleImageClick(item)}>
             <img

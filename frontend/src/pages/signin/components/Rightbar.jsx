@@ -44,6 +44,8 @@ const Rightbar = ()=>{
              localStorage.setItem('TOKEN',res.data.token)
              localStorage.setItem('EMAIL',res.data.email)
             localStorage.setItem('FNAME',res.data.fname)
+            localStorage.setItem('LNAME',res.data.lname)
+
 
           }
          

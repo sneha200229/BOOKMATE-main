@@ -1,9 +1,22 @@
 import { AccountCircle, AddCircle, Diversity2, Home, Label, Logout, Message, ModeNight } from '@mui/icons-material'
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch } from '@mui/material'
 import React from 'react'
+//import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Leftbar = ()=>{
+  const navigate = useNavigate()
+
+
+const handleSubmit=()=>
+{
+  navigate('/feed')
+
+}
+
+
+
 
     return(
 
@@ -15,13 +28,14 @@ const Leftbar = ()=>{
         
         <List>
           <ListItem disablePadding sx={{backgroundColor:'#EEF1F4', borderRadius:'10px',marginBottom:'20px'} }>
-            <ListItemButton component='a' href='#home'>
+            <ListItemButton component='a' href='#home'onClick={handleSubmit}>
               <ListItemIcon>
                 <Home/>
               </ListItemIcon>
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
+
 
           <ListItem disablePadding sx={{backgroundColor:'#EEF1F4', borderRadius:'10px',marginBottom:'20px'} }>
             <ListItemButton component='a' href='#messages'>

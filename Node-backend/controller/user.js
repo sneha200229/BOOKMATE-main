@@ -62,6 +62,7 @@ module.exports.signin=(req,res)=>{
         res.send({
             email: result.email,
             fname: result.fname, 
+            lname:result.lname,
             code:200,
             message:'user found',
             token:'ffgffg'
