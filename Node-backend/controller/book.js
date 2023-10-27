@@ -7,10 +7,6 @@ const BookModel = require('../models/book');
 
 module.exports.fetchBook = (req, res) => {
   BookModel.find()
-  //.populate("user","fname")
-  //   path: 'user',
-  //   select: 'fname lname' // Specify the fields to populate
-  // })
     .then((books) => {
       console.log(JSON.stringify(books, null, 2)); // Log the response data
 
@@ -21,27 +17,6 @@ module.exports.fetchBook = (req, res) => {
       res.status(500).json({ error: 'Error fetching books' });
     });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports.storeBook = (req, res) => {
   const{bookName,bookAuthor,bookDescription,image}=req.body;
@@ -68,4 +43,22 @@ module.exports.storeBook = (req, res) => {
     .catch((error) => {
       res.send({code:500, message: 'Error storing book', error });
     });
+};
+
+module.exports.displayFeed=async(req,res)=>
+{
+  try {
+    // Query the database for random books and user names
+    const randomBooks = await BookModel.aggregate([
+        { $sample: { size: 10 } } // Get 10 random documents
+    ]);
+
+    res.json(randomBooks);
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching random books' });
+}
+
+
+
 };

@@ -52,6 +52,7 @@ app.post('/submitotp',userController.submitotp)
 app.post('/storeBook',bookController.storeBook)
 app.get('/fetchBook',bookController.fetchBook)
 app.put('/updateProfile',userController.updateProfile)
+app.get('/displayFeed',bookController.displayFeed)
 
 
 app.listen(port,()=>{
