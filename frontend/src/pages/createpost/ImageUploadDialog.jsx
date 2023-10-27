@@ -51,12 +51,6 @@ const ImageUploadDialog = ({ open, onClose }) => {
   };
   
 
-
-
-
-
-
-  
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -68,30 +62,6 @@ const ImageUploadDialog = ({ open, onClose }) => {
 
     }
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const handleInputChange = (setter) => (event) => {
     setter(event.target.value);

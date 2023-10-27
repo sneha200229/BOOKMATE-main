@@ -17,7 +17,8 @@ module.exports.signup = (req,res) =>{
         password: req.body.password,
         phone: req.body.phone,
         fname: req.body.fname,
-        lname: req.body.lname
+        lname: req.body.lname,
+       // city:req.body.city//new
 
     })
 
@@ -63,6 +64,8 @@ module.exports.signin=(req,res)=>{
             email: result.email,
             fname: result.fname, 
             lname:result.lname,
+           // city:city,
+           // bio:bio,
             code:200,
             message:'user found',
             token:'ffgffg'
@@ -168,7 +171,47 @@ module.exports.submitotp = (req, res) => {
             return res.status(500).json({ code: 500, message: 'Server error' });
         });
 };
+module.exports.updateProfile =async (req, res) => {
+    console.log(req.body);
 
-// Forget password end
+    const email = req.body.email; // Assuming you pass the user's ID in the request
+    const newCity = req.body.city;
+    const fname=req.body.fname;
+    const bio=req.body.bio;
+    const lname=req.body.lname;
+    const updateFields = {
+        city: newCity,
+        fname: fname,
+        bio: bio,
+        lname:lname,
+    };
 
-//code for storing inputs while creating post
+
+    // Update the user's document with the new 'city' field
+   
+    UserModel.findOneAndUpdate({ email: email }, updateFields ,{ new: true })
+        .then(user => {
+            if (user.email!==req.body.email) {
+                return res.status(404).json({ code: 404, message: 'User not found' });
+            }
+
+            //return res.status(200).json({ code: 200, message: 'changes added successfully' });
+            else{
+            res.status(200).json
+        ({
+
+            city:user.city,
+            bio:user.bio,
+            fname:user.fname,
+            lname:user.lname,
+            code:200,
+            message:'updation done',
+
+        })
+    }
+            
+        })
+        .catch(err => {
+            return res.status(500).json({ code: 500, message: 'Error updating user profile' });
+        });
+};
