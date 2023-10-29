@@ -3,7 +3,7 @@ const router=express.Router();
 const mongoose=require("mongoose")
 const fs = require('fs');
 const BookModel = require('../models/book');
-const user = require("../models/user");
+const UserModel = require("../models/user");
 const userController = require('./user');
 const requirelogin = require('../middlewares/requirelogin'); // Adjust the path to match your folder structure
 
@@ -38,7 +38,7 @@ console.log(req.user)
     bookAuthor,
     bookDescription,
     bookImage:image,
-    postedBy:req.user
+    postedBy:req.user._id
    
     
   });

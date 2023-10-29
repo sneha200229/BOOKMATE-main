@@ -11,14 +11,16 @@ const requirelogin = require('./middlewares/requirelogin');
 
 const app = express()
 const port = 5001
-bookController.storeBookWithMiddleware = [requirelogin, bookController.storeBook];
+//bookController.storeBookWithMiddleware = [requirelogin, bookController.storeBook];
 bookController.fetchBookWithMiddleware = [requirelogin, bookController.fetchBook];
 bookController.displayFeedWithMiddleware = [requirelogin, bookController.displayFeed];
 
 
-//userController.signupWithMiddleware = [requirelogin, userController.signup];
+ userController.searchUserWithMiddleware = [requirelogin, userController.searchUser];
+//userController.displayProfileWithMiddleware = [requirelogin, userController.displayProfile];
+
 //userController.signiWithnMiddleware = [requirelogin, userController.signin];
-//bookController.storeBookWithMiddleware = [requirelogin, bookController.storeBook];
+bookController.storeBookWithMiddleware = [requirelogin, bookController.storeBook];
 
 
 const connectionString ='mongodb+srv://admin:admin@cluster0.temk4nq.mongodb.net/?retryWrites=true&w=majority'
@@ -70,7 +72,10 @@ app.get('/fetchBook', bookController.fetchBookWithMiddleware);
 //app.get('/fetchBook',bookController.fetchBook)
 app.put('/updateProfile',userController.updateProfile)
 //app.get('/displayFeed',bookController.displayFeed)
-app.get('/displayFeed', bookController.displayFeedWithMiddleware);
+app.get('/displayFeed/', bookController.displayFeedWithMiddleware);
+app.get('/searchUser/:fname',userController.searchUserWithMiddleware);
+//app.get('/displayProfile/:fname',userController.displayProfileWithMiddleware);
+//app.get('/searchUser/:fname', bookController.searchUser);
 
 
 

@@ -11,11 +11,18 @@ import Reset from "./pages/reset/Reset"
 import Feed from "./pages/feed/Feed"
 import Profile from "./pages/profile/Profile"
 
+// import userProfile from "./pages/userProfile"
 import Otp from "./pages/reset/Otp"
+// import UserProfile from './components/UserProfile'; // Create UserProfile component
+// import Userprofile from './pages/profile/components/UserProfile';
+ import UserProfile from './pages/profile/UserProfile';
 
 
 
-function App() {
+
+
+function App()
+ {
   return (
     <div>
         <Router>
@@ -25,7 +32,13 @@ function App() {
               <Route path="/Reset" element = {<Reset/>}/>
               <Route path="/Feed" element={<Feed/>}/>
               <Route path="/Profile" element={<Profile/>}/>
+             
               <Route path="/Otp" element={<Otp/>}/>
+             {/* <Route path="/userProfile/:id" element={<userProfile/>}/> */}
+             <Route path="/UserProfile/:fname" element={<UserProfile/>} />
+             
+
+
              
              
           </Routes>
