@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios"
+//const jwt =require("jsonwebtoken")
 
 
 
@@ -13,6 +14,8 @@ const Rightbar = ()=>{
   const[email,setEmail]= useState('')
   const[password,setPassword]= useState('')
   //const[lname,setLastName]= useState('')
+ //const [token, setToken] = useState(''); // Declare the 'token' state variable
+
 
   const handleSubmit=()=>
   {
@@ -37,14 +40,25 @@ const Rightbar = ()=>{
           }
           if(res.data.code===200)
           {
-            alert("Login Successful")
              //move to feed page
-             navigate('/feed')
-            // console.log('LNAME from res.data:', res.data.lname); // Log the value
-             localStorage.setItem('TOKEN',res.data.token)
+            //localStorage.setItem("jwt",res.data.token)
+            //localStorage.setItem("jwt",res.data.token)
+            localStorage.setItem('TOKEN',res.data.token)
              localStorage.setItem('EMAIL',res.data.email)
-            localStorage.setItem('FNAME',res.data.fname)
-            localStorage.setItem('LNAME',res.data.lname)
+             localStorage.setItem('FNAME',res.data.fname)
+             localStorage.setItem('LNAME',res.data.lname)
+          //  console.log(localStorage.getItem("jwt"));
+            // console.log(localStorage.getItem("EMAIL"));
+             alert("Login Successful")
+           // console.log("before")
+             navigate('/feed')
+            //  useEffect(() => {
+            //   console.log("After navigation");
+            // }, [location]); 
+
+            // console.log('LNAME from res.data:', res.data.lname); // Log the value
+           
+         
            
 
 
@@ -55,6 +69,12 @@ const Rightbar = ()=>{
           console.log(err)
       })
   }
+//   const axiosInstance = axios.create({
+//     baseURL: 'http://localhost:5001',
+//     headers: {
+//         Authorization: `Bearer ${token}`,
+//     },
+// });
 
 
 

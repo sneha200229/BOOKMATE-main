@@ -1,82 +1,172 @@
-
 const UserModel = require('../models/user')
-//const multer = require('multer');
-//const path = require('path');
-
-//const s3 = require('../s3service.js');
-
-
-
+const bcrypt =require('bcrypt');
+const jwt =require("jsonwebtoken")
+const Jwt_secret=require("../key")
 //Signup code start
-module.exports.signup = (req,res) =>{
-
-    console.log(req.body)
+module.exports.signup = (req, res) => {
+    console.log(req.body);
 
     const newUser = new UserModel({
         email: req.body.email,
-        password: req.body.password,
         phone: req.body.phone,
         fname: req.body.fname,
         lname: req.body.lname,
-       // city:req.body.city//new
+    });
 
-    })
+    if (!newUser.email || !req.body.password || !newUser.phone || !newUser.fname || !newUser.lname) {
+        res.status(422).json({ error: "Please add all fields" });
+        return;
+    }
 
-    newUser.save().then(()=>{
-        res.send({ 
-            code: 200 , 
-            message : 'Signup success',
-        //     lname: result.lname,
-        //     code:200,
-        //    // message:'user found',
-        //     token:'signuptoken'
+    // Hash the password before saving it to the user
+    bcrypt.hash(req.body.password, 12)
+        .then((hashedPassword) => {
+            newUser.password = hashedPassword;
 
+            UserModel.findOne({ email: newUser.email })
+                .then((savedUser) => {
+                    if (savedUser) {
+                        return res.status(422).json({ error: "User already exists with this email" });
+                    }
 
-
-
-
+                    newUser.save()
+                        .then((user) => {
+                            const userID = user._id;
+                            console.log('User ID:', userID);
+                            res.send({
+                                code: 200,
+                                message: 'Signup success',
+                            });
+                        })
+                        .catch((err) => {
+                            res.send({ code: 500, message: 'Signup Err' });
+                        });
+                })
+                .catch((err) => {
+                    res.send({ code: 500, message: 'Error checking existing user' });
+                });
         })
-    })
-
-        .catch((err)=>{
-            res.send({code: 500, message: 'Signup Err'})
-        })
-
-   
-}
+        .catch((err) => {
+            res.send({ code: 500, message: 'Error hashing password' });
+        });
+};
 // Signup code end
 
 
 //Signin code start
+module.exports.signin = (req, res) => {
+    console.log(req.body.email);
 
-module.exports.signin=(req,res)=>{
-    console.log(req.body.email)
-    //email password match
-   UserModel.findOne({email:req.body.email})
-   .then(result=>{
-    console.log(result,'11')
+    // Find the user by email
+    UserModel.findOne({ email: req.body.email })
+        .then(result => {
+            console.log(result, '11');
 
-    //match password with req.body.passwor
-    if(result.password !== req.body.password){
-        res.send({code:404,message:'password wrong'})
-    }else{
-        res.send({
-            email: result.email,
-            fname: result.fname, 
-            lname:result.lname,
-           // city:city,
-           // bio:bio,
-            code:200,
-            message:'user found',
-            token:'ffgffg'
+            if (!result) {
+                res.send({ code: 404, message: 'User not found' });
+            } else {
+                // Compare the hashed password from the database with the provided password
+                bcrypt.compare(req.body.password, result.password, (err, passwordMatch) => {
+
+
+
+                    // if (passwordMatch) {
+                    //     const token=jwt.sign({_id:result.id},Jwt_secret)
+                    //     //res.json(token)
+                        
+                    //     console.log(token)
+                    //     res.send({
+                    //         email: result.email,
+                    //         fname: result.fname,
+                    //         lname: result.lname,
+                    //         code: 200,
+                    //         message: 'User found',
+                    //        token:token
+                    //     });
+                    // } else {
+                    //     res.send({ code: 404, message: 'Password wrong' });
+                    // }
+
+
+                    if (passwordMatch) {
+                       const token = jwt.sign({ _id: result.id }, Jwt_secret);
+                       console.log(token);
+                    
+                        // Construct a response object with both token and user details
+                        const responseObj = {
+                            token:token,
+                            email: result.email,
+                            fname: result.fname,
+                            lname: result.lname,
+                            code: 200,
+                            message: 'User found',
+                        };
+                    
+                        res.json(responseObj); // Send the combined response
+                    } else {
+                        res.status(404).json({ code: 404, message: 'Password wrong' });
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                });
+            }
         })
-    }
+        .catch(err => {
+            res.send({ code: 500, message: 'User not found' });
+        });
+}
 
-   })
-   .catch(err=>{
-    res.send({code:500,message:'user not foumd'})
 
-   })}
+// module.exports.signin=(req,res)=>{
+//     console.log(req.body.email)
+//     //email password match
+//    UserModel.findOne({email:req.body.email})
+//    .then(result=>{
+//     console.log(result,'11')
+
+//     //match password with req.body.passwor
+//     if(result.password !== req.body.password){
+//         res.send({code:404,message:'password wrong'})
+//     }else{
+//         res.send({
+//             email: result.email,
+//             fname: result.fname, 
+//             lname:result.lname,
+//             code:200,
+//             message:'user found',
+//             token:'ffgffg'
+//         })
+//     }
+
+//    })
+//    .catch(err=>{
+//     res.send({code:500,message:'user not foumd'})
+
+//    })}
 
    //Signin code end
 

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 //const {ObjectId}=mongoose.Schema.Types
+const User = require('../models/user'); // Adjust the path to the User model
+
 const bookSchema = new mongoose.Schema(
   {
     bookName:{
@@ -18,16 +20,10 @@ const bookSchema = new mongoose.Schema(
       type:String,
       require:true
     },
-
-    user: {
+    postedBy:{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required:true,
-    },
-    // postedBy:{
-    //   type:ObjectId,
-    //   ref:User
-    // }
+      ref:"User"
+    }
   }
 );
 

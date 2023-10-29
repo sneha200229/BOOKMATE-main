@@ -3,6 +3,11 @@ import { Button, Dialog, DialogTitle, DialogContent, TextField, Input, Box, Stac
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import styled from '@emotion/styled';
 import axios from "axios"
+//import 'react-toastify/dist/ReactToastify.css';
+
+import {toast} from 'react-toastify';
+
+
 
 const ImageUploadDialog = ({ open, onClose }) => {
   const [bookImage, setImage] = useState(null);
@@ -10,6 +15,13 @@ const ImageUploadDialog = ({ open, onClose }) => {
   const [bookName, setInput1] = useState('');
   const [bookAuthor, setInput2] = useState('');
   const [bookDescription, setInput3] = useState('');
+  const [token, setToken] = useState(''); // Declare the 'token' state variable
+
+  //const notifyA=(msg)=>toast.error(msg)
+  const notifyB=(msg)=>toast.success(msg)
+
+
+
  
   const handleSave = async () => {
     try {
@@ -30,6 +42,7 @@ const ImageUploadDialog = ({ open, onClose }) => {
             method: "post",
             headers: {
               "Content-type": "application/json",
+               Authorization:"Bearer "+localStorage.getItem("TOKEN")
             },
             body: JSON.stringify({
               bookName,
@@ -45,6 +58,7 @@ const ImageUploadDialog = ({ open, onClose }) => {
         .catch((err) => console.log(err));
   
       alert("Book details saved");
+      notifyB("successfully uploaded")
     } catch (error) {
       console.error("Error saving book details:", error);
     }
@@ -74,6 +88,9 @@ const ImageUploadDialog = ({ open, onClose }) => {
     setInput3('');
     onClose();
   };
+
+  
+ 
   return (
     <Dialog open={open} onClose={handleDialogClose} >
       <DialogTitle>Create your book post</DialogTitle>

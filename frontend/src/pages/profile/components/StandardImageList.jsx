@@ -14,8 +14,11 @@ export default function StandardImageList() {
   useEffect(() => {
     // Fetch data from the backend when the component mounts
     fetch("http://localhost:5001/fetchBook", {
+      method: "get",
       headers: {
-        "Authorization": "Bearer " + localStorage.getItem("jwt")
+        "Content-type": "application/json",
+        Authorization:"Bearer "+localStorage.getItem("TOKEN")
+
       },
     })
   //     .then((res) => res.json())
@@ -32,10 +35,39 @@ export default function StandardImageList() {
   .then((result) => setData(result))
   .catch((err) => console.error(err));
 }, []);
+// .then((result) => {
+//   // Filter the data to display only the books posted by the logged-in user
+//   const loggedInUserId = localStorage.getItem("userId"); // Change to the actual key where user ID is stored
+//   const userBooks = result.filter((item) => item.postedBy._id === loggedInUserId);
+
+//   setData(userBooks);
+// })
+// .catch((err) => console.error(err));
+// }, []);
 
 
 
-
+// .then((result) => {
+//   // Ensure that the result is an array before using filter
+//   if (Array.isArray(result)) {
+//     const loggedInUserId = localStorage.getItem("userId"); // Change to the actual key where user ID is stored
+//     const userBooks = result.filter((item) => item.postedBy._id === loggedInUserId);
+//     setData(userBooks);
+//   } else {
+//     throw new Error("Data is not in the expected format");
+//   }
+// })
+// .catch((err) => console.error(err));
+// }, []);
+// .then((result) => {
+//   if (Array.isArray(result)) {
+//     const loggedInUserId = localStorage.getItem("userId");
+//     const userBooks = result.filter((item) => item.postedBy?._id === loggedInUserId);
+//     setData(userBooks);
+//   } else {
+//     throw new Error("Data received is not in the expected format");
+//   }
+// })
 
 
 
@@ -151,3 +183,4 @@ export default function StandardImageList() {
 
 
 // ];
+//  )}
