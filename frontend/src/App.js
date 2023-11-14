@@ -15,7 +15,7 @@ import Profile from "./pages/profile/Profile"
 import Otp from "./pages/reset/Otp"
 // import UserProfile from './components/UserProfile'; // Create UserProfile component
 // import Userprofile from './pages/profile/components/UserProfile';
- import UserProfile from './pages/profile/UserProfile';
+ import AnotherUserProfile from './pages/anotherUserProfile/AnotherUserProfile';
 
 
 
@@ -35,7 +35,8 @@ function App()
              
               <Route path="/Otp" element={<Otp/>}/>
              {/* <Route path="/userProfile/:id" element={<userProfile/>}/> */}
-             <Route path="/UserProfile/:fname" element={<UserProfile/>} />
+             <Route path='/AnotherUserProfile/:fname' element={<AnotherUserProfile/>}/>
+             {/* <Route path="/AnotherUserProfile/StandardImageListUser/:fname" element={<AnotherUserProfile/>} /> */}
              
 
 

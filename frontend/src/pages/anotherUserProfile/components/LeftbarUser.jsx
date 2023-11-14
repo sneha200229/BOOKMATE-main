@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Leftbar = ()=>{
+const LeftbarUser = ()=>{
 
   const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -122,6 +122,6 @@ const Leftbar = ()=>{
 }
 
 
-export default Leftbar
+//export default LeftbarUser
 
 

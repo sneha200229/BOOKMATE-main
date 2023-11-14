@@ -75,7 +75,7 @@ const Navbar = ()=>{
           setSearchResult(userData);
           //history.push(`/profile/${userData.user.fname}`);
          // navigate(`../../userProfile/UserProfile${userData.user.fname}`); // Use navigate instead of history.push
-          navigate(`/UserProfile/${userData.user.fname}`); 
+          navigate(`/AnotherUserProfile/${userData.user.fname}`); 
 
         }
       } catch (error) {

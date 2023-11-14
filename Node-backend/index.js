@@ -17,10 +17,11 @@ bookController.displayFeedWithMiddleware = [requirelogin, bookController.display
 
 
  userController.searchUserWithMiddleware = [requirelogin, userController.searchUser];
-//userController.displayProfileWithMiddleware = [requirelogin, userController.displayProfile];
+// userController.fetchUserWithMiddleware = [requirelogin, userController.fetchUser];
 
 //userController.signiWithnMiddleware = [requirelogin, userController.signin];
 bookController.storeBookWithMiddleware = [requirelogin, bookController.storeBook];
+// bookController.fetchBookUserWithMiddleware = [requirelogin, bookController.fetchBookUser];
 
 
 const connectionString ='mongodb+srv://admin:admin@cluster0.temk4nq.mongodb.net/?retryWrites=true&w=majority'
@@ -76,6 +77,10 @@ app.get('/displayFeed/', bookController.displayFeedWithMiddleware);
 app.get('/searchUser/:fname',userController.searchUserWithMiddleware);
 //app.get('/displayProfile/:fname',userController.displayProfileWithMiddleware);
 //app.get('/searchUser/:fname', bookController.searchUser);
+// app.get('/fetchBookOfUser/:fname',userController.searchUserWithMiddleware);
+// app.get('/fetchUser/:fname',userController.fetchUserWithMiddleware);
+
+
 
 
 

@@ -56,44 +56,7 @@ console.log(req.user)
     });
 
 };
-//app.post('/storeBook', requirelogin, module.exports.storeBook);
 
-
-
-
-
-// //displayFeed
-// module.exports.displayFeed=async(req,res)=>
-// {
-//   try {
-//     // Query the database for random books and user names
-//     const randomBooks = await BookModel.aggregate([
-//         { $sample: { size: 10 } } // Get 10 random documents
-//     ]);
-
-//     res.json(randomBooks);
-// } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Error fetching random books' });
-// }
-// };
-// module.exports.displayFeed = async (req, res) => {
-//   try {
-//     // Query the database for random books
-//     const randomBooks = await BookModel.aggregate([{ $sample: { size: 10 }]);
-
-//     // Use the populate function to fetch user information and select only the 'fname' field
-//     const populatedRandomBooks = await BookModel.populate(randomBooks, {
-//       path: 'author',
-//       select: 'fname',
-//     });
-
-//     res.json(populatedRandomBooks);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Error fetching random books' });
-//   }
-// };
 module.exports.displayFeed = async (req, res) => {
   try {
     // Query the database for random books
@@ -111,3 +74,52 @@ module.exports.displayFeed = async (req, res) => {
     res.status(500).json({ message: 'Error fetching random books' });
   }
 };
+
+// //fetchbookofRequired User
+// module.exports.fetchBookUser = async (req, res) => {
+//   try {
+//     const fnameToSearch = req.query.fname; // Get the fname from the request query parameters
+
+//     // Use a case-insensitive regular expression to match the fname
+//     const user = await UserModel.findOne({ fname: { $regex: new RegExp(fnameToSearch, 'i') }}).select('-password');
+
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+
+//     const books = await BookModel.find({ postedBy: user._id });
+
+//     if (books.length === 0) {
+//       return res.status(200).json({ user, message: 'No books found for this user' });
+//     }
+
+//     // Extract book images from the books array
+//     const bookImages = books.map((book) => book.bookImage);
+
+//     res.status(200).json({ user, bookImages });
+//   } catch (err) {
+//     console.error('Error fetching books:', err);
+//     res.status(500).json({ error: 'Server error in fetching books' });
+//   }
+// };
+
+
+// module.exports.fetchBookOfUser = async (req, res) => {
+//   try {
+//     const userIdToSearch = req.query.userId; // Get the user ID from the request query parameters
+
+//     const books = await BookModel.find({ postedBy: userIdToSearch });
+
+//     if (books.length === 0) {
+//       return res.status(200).json({ message: 'No books found for this user' });
+//     }
+
+//     // Extract book images from the books array
+//     const bookImages = books.map((book) => book.bookImage);
+
+//     res.status(200).json({ bookImages });
+//   } catch (err) {
+//     console.error('Error fetching books:', err);
+//     res.status(500).json({ error: 'Server error in fetching books' });
+//   }
+// };
