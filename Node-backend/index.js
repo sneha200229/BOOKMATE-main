@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userController = require('./controller/user')
 const bookController = require('./controller/book')
+const bookRequestController=require('./controller/bookRequest')
 const Jwt_secret=require("./key")
 const cors = require('cors');
 const requirelogin = require('./middlewares/requirelogin'); 
@@ -11,17 +12,11 @@ const requirelogin = require('./middlewares/requirelogin');
 
 const app = express()
 const port = 5001
-//bookController.storeBookWithMiddleware = [requirelogin, bookController.storeBook];
 bookController.fetchBookWithMiddleware = [requirelogin, bookController.fetchBook];
 bookController.displayFeedWithMiddleware = [requirelogin, bookController.displayFeed];
-
-
- userController.searchUserWithMiddleware = [requirelogin, userController.searchUser];
-// userController.fetchUserWithMiddleware = [requirelogin, userController.fetchUser];
-
-//userController.signiWithnMiddleware = [requirelogin, userController.signin];
+userController.searchUserWithMiddleware = [requirelogin, userController.searchUser];
 bookController.storeBookWithMiddleware = [requirelogin, bookController.storeBook];
-// bookController.fetchBookUserWithMiddleware = [requirelogin, bookController.fetchBookUser];
+bookRequestController.bookRequestWithMiddleware=[requirelogin,bookRequestController.bookrequest]
 
 
 const connectionString ='mongodb+srv://admin:admin@cluster0.temk4nq.mongodb.net/?retryWrites=true&w=majority'
@@ -75,6 +70,7 @@ app.put('/updateProfile',userController.updateProfile)
 //app.get('/displayFeed',bookController.displayFeed)
 app.get('/displayFeed/', bookController.displayFeedWithMiddleware);
 app.get('/searchUser/:fname',userController.searchUserWithMiddleware);
+app.post('/bookrequest',bookRequestController.bookRequestWithMiddleware)
 //app.get('/displayProfile/:fname',userController.displayProfileWithMiddleware);
 //app.get('/searchUser/:fname', bookController.searchUser);
 // app.get('/fetchBookOfUser/:fname',userController.searchUserWithMiddleware);

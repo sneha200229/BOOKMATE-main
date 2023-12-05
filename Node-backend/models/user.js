@@ -1,12 +1,8 @@
 const mongoose = require('mongoose')
-//module.exports = mongoose.model('User',{email:String,password:String,otp:Number,fname:String,lname:String,phone:Number});
-//const{ObjectId}=mongoose.Schema.Types
+
 const userSchema = new mongoose.Schema(
     {
-      // userId: {
-      //   type: mongoose.Schema.Types.ObjectId,
-      //   default: mongoose.Types.ObjectId, // This is auto-generated
-      // },
+    
       email:{
         type:String,
         required:true
@@ -31,8 +27,7 @@ const userSchema = new mongoose.Schema(
         type:Number,
         require:true
       },
-    //   followers:[{type:ObjectId,ref:"User"}],
-    //   following:[{type:ObjectId,ref:"User"}]
+ 
     city:
     {
       type:String
@@ -41,13 +36,7 @@ const userSchema = new mongoose.Schema(
     {
       type:String
     },
-    // books:
-    // {
-    //   type:mongoose.Schema.Types.ObjectId,
-    //   ref:'Book',
-    // }
-  
-     
+   
     }
   );
   
