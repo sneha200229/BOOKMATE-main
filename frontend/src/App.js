@@ -10,6 +10,7 @@ import Signup from "./pages/signup/Signup"
 import Reset from "./pages/reset/Reset"
 import Feed from "./pages/feed/Feed"
 import Profile from "./pages/profile/Profile"
+import Friends from "./pages/friends/Friends"
 
 // import userProfile from "./pages/userProfile"
 import Otp from "./pages/reset/Otp"
@@ -37,7 +38,8 @@ function App()
              {/* <Route path="/userProfile/:id" element={<userProfile/>}/> */}
              <Route path='/AnotherUserProfile/:fname' element={<AnotherUserProfile/>}/>
              {/* <Route path="/AnotherUserProfile/StandardImageListUser/:fname" element={<AnotherUserProfile/>} /> */}
-             
+             <Route path="/Friends" element={<Friends/>}/>
+
 
 
              

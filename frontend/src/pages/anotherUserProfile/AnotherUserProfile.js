@@ -42,12 +42,16 @@ const ImageBox = ({ item, user }) => {
     })
       .then((res) => {
         if (res.status === 201) {
-          console.log('Book request sent successfully');
+          window.alert('Book request sent successfully!');
+        console.log('Book request sent successfully');
         } else {
           throw new Error('Failed to send book request');
         }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        window.alert('Failed to send book request. Please try again.');
+        console.error(error);
+      });
   };
 
   return (
