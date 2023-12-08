@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -43,7 +45,7 @@ const ImageBox = ({ item, user }) => {
       .then((res) => {
         if (res.status === 201) {
           window.alert('Book request sent successfully!');
-        console.log('Book request sent successfully');
+          console.log('Book request sent successfully');
         } else {
           throw new Error('Failed to send book request');
         }
@@ -135,7 +137,7 @@ export default function AnotherUserProfile() {
         </Toolbar>
       </AppBar>
 
-      <Box display="flex">
+      <Box display="flex" sx={{justifyContent:'center',p:4}}>
         <Leftbar />
         <Box flex={1}>
           {generateImageGrid(books, user)}
@@ -147,12 +149,12 @@ export default function AnotherUserProfile() {
 
 const generateImageGrid = (books, user) => {
   return (
-    <ImageList sx={{ width: '100%', height: 600 }} cols={3} rowHeight={200}>
-      {books.map((item) => (
-        <ImageBox key={item._id} item={item} user={user} />
-      ))}
-    </ImageList>
+    <div style={{ overflowY: 'auto', maxHeight: '600px', margin:'0 auto' }}>
+      <ImageList sx={{ width: '100%', height: 'auto' }} cols={3} rowHeight={200}>
+        {books.map((item) => (
+          <ImageBox key={item._id} item={item} user={user} />
+        ))}
+      </ImageList>
+    </div>
   );
 };
-
-

@@ -286,36 +286,3 @@ module.exports.updateProfile =async (req, res) => {
     }
 };
 
-// module.exports.displayProfile=async(req,res)=>
-// {
-//     BookModel.find({postedBy:req.user._id})
-
-//     .then((books) => {
-//           console.log(JSON.stringify(books, null, 2)); // Log the response data
-    
-//           res.json(books);
-//         })
-//         .catch((error) => {
-//           console.error('Error fetching books:', error);
-//           res.status(500).json({ error: 'Error fetching books' });
-//         });
-//     };
-    
-
-// module.exports.fetchUser = async (req, res) => {
-//   try {
-//     const { fname } = req.query; // Get the fname from the request query parameters
-
-//     // Use a case-insensitive regular expression to match the fname
-//     const user = await UserModel.findOne({ fname: { $regex: new RegExp(fname, 'i') }}).select('-password');
-
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
-
-//     res.status(200).json({ user });
-//   } catch (err) {
-//     console.error('Error fetching user:', err);
-//     res.status(500).json({ error: 'Server error in fetching user' });
-//   }
-// };

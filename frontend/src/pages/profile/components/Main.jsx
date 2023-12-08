@@ -2,7 +2,7 @@ import { CheckBox, Directions, ExpandMore, Favorite, FavoriteBorder, FavoriteOut
 import { Box, Button, Icon, ListItem, Stack, Typography } from '@mui/material';
 import Follow from './Follow';
 import ImageList from './StandardImageList'
-import Pic from '../../../images/person.jpg'
+import Pic from '../../../images/portrait.jpg'
 import React from 'react'
 
 

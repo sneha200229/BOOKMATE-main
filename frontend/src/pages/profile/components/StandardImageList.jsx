@@ -9,12 +9,13 @@ import { Button } from '@mui/material';
 export default function StandardImageList() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [data, setData] = useState([]); // To store fetched data
+  //const isMounted = useRef(true); // Track the mounted state
 
 
   useEffect(() => {
     // Fetch data from the backend when the component mounts
     fetch("http://localhost:5001/fetchBook", {
-      method: "get",
+      method: "GET",
       headers: {
         "Content-type": "application/json",
         Authorization:"Bearer "+localStorage.getItem("TOKEN")
@@ -32,42 +33,43 @@ export default function StandardImageList() {
       throw new Error("Failed to fetch data");
     }
   })
+
+
   .then((result) => setData(result))
   .catch((err) => console.error(err));
 }, []);
-// .then((result) => {
-//   // Filter the data to display only the books posted by the logged-in user
-//   const loggedInUserId = localStorage.getItem("userId"); // Change to the actual key where user ID is stored
-//   const userBooks = result.filter((item) => item.postedBy._id === loggedInUserId);
+// useEffect(() => {
+//   // Set isMounted to false when the component is unmounted
+//   return () => {
+//     isMounted.current = false;
+//   };
+// }, []);
 
-//   setData(userBooks);
-// })
-// .catch((err) => console.error(err));
+// useEffect(() => {
+//   // Fetch data from the backend when the component mounts
+//   fetch("http://localhost:5001/fetchBook", {
+//     method: "get",
+//     headers: {
+//       "Content-type": "application/json",
+//       Authorization: "Bearer " + localStorage.getItem("TOKEN"),
+//     },
+//   })
+//     .then((res) => {
+//       if (isMounted.current && res.status === 200) {
+//         return res.json();
+//       } else {
+//         throw new Error("Failed to fetch data");
+//       }
+//     })
+//     .then((result) => isMounted.current && setData(result))
+//     .catch((err) => isMounted.current && console.error(err));
 // }, []);
 
 
 
-// .then((result) => {
-//   // Ensure that the result is an array before using filter
-//   if (Array.isArray(result)) {
-//     const loggedInUserId = localStorage.getItem("userId"); // Change to the actual key where user ID is stored
-//     const userBooks = result.filter((item) => item.postedBy._id === loggedInUserId);
-//     setData(userBooks);
-//   } else {
-//     throw new Error("Data is not in the expected format");
-//   }
-// })
-// .catch((err) => console.error(err));
-// }, []);
-// .then((result) => {
-//   if (Array.isArray(result)) {
-//     const loggedInUserId = localStorage.getItem("userId");
-//     const userBooks = result.filter((item) => item.postedBy?._id === loggedInUserId);
-//     setData(userBooks);
-//   } else {
-//     throw new Error("Data received is not in the expected format");
-//   }
-// })
+
+
+
 
 
 
@@ -126,7 +128,7 @@ export default function StandardImageList() {
     <Typography id="image-details-description" variant="body2" color="textSecondary" gutterBottom>
       Description: {selectedImage && selectedImage.bookDescription}
     </Typography>
-          <Button variant="contained" color="primary" onClick={handleCloseModal}>
+          <Button variant="contained" color="primary" onClick={handleCloseModal} sx={{display:'none'}}>
             Request
           </Button>
         </Box>
